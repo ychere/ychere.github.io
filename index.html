@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en"> <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONE API Portal - Landing Page</title> <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            /* Prioritize Inter for English, Noto Sans JP as fallback */
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+        }
+        /* ONE Magenta Color (Approximate) */
+        .bg-one-magenta { background-color: #E6007E; }
+        .text-one-magenta { color: #E6007E; }
+        .border-one-magenta { border-color: #E6007E; }
+        .hover\:bg-one-magenta-dark:hover { background-color: #c00068; } /* Slightly darker magenta */
+        .ring-one-magenta { --tw-ring-color: #E6007E; } /* For focus rings */
+
+        /* Filter button active state */
+        .filter-button.active {
+            background-color: #E6007E;
+            color: white;
+            border-color: #E6007E;
+        }
+        /* API product card display style */
+        .api-product-card {
+            display: flex; /* Use flex for consistent layout */
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex-shrink-0">
+                     <span class="text-2xl font-bold text-one-magenta">ONE</span>
+                     <span class="text-xl font-semibold text-gray-700">API Portal</span>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#api-products-section" class="text-gray-600 hover:text-one-magenta font-medium">API Products</a> <a href="#" class="text-gray-600 hover:text-one-magenta font-medium">APPs</a> <a href="#" class="text-gray-600 hover:text-one-magenta font-medium">Roadmap</a> <a href="#" class="text-gray-600 hover:text-one-magenta font-medium">Get Started</a> <a href="#" class="text-gray-600 hover:text-one-magenta font-medium">Support</a> <div class="relative hidden lg:block">
+                        <input type="text" placeholder="Search" class="px-4 py-1.5 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-one-magenta focus:border-transparent text-sm w-48"> <svg class="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                    <a href="#" class="text-gray-600 hover:text-one-magenta font-medium"></a> <a href="#" class="bg-one-magenta text-white px-4 py-1.5 rounded-full text-sm font-medium hover:bg-one-magenta-dark transition duration-150 ease-in-out">Login</a> </div>
+
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-one-magenta focus:outline-none">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobile-menu" class="md:hidden hidden mt-4 space-y-2">
+                 <input type="text" placeholder="Search APIs & Docs..." class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-one-magenta focus:border-transparent text-sm mb-2"> <a href="#api-products-section" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-one-magenta hover:bg-gray-100">API Products</a> <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-one-magenta hover:bg-gray-100">APPs</a> <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-one-magenta hover:bg-gray-100">Roadmap</a> <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-one-magenta hover:bg-gray-100">Get Started</a> <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-one-magenta hover:bg-gray-100">Support</a> <hr class="my-2">
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-one-magenta hover:bg-gray-100"></a> <a href="#" class="block w-full text-center bg-one-magenta text-white px-4 py-2 rounded-md text-base font-medium hover:bg-one-magenta-dark transition duration-150 ease-in-out">Register</a> </div>
+        </nav>
+    </header>
+
+    <section class="bg-gradient-to-r from-pink-50 via-white to-pink-50 py-16 sm:py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-800 tracking-tight mb-4">
+                <span class="text-one-magenta">Integrate</span> with <span class="text-one-magenta">ONE</span> API </h1>
+            <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                Enhance your supply chain through direct API access. Gain real-time visibility and optimize your logistics performance. </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#api-products-section" class="bg-one-magenta text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-one-magenta-dark transition duration-150 ease-in-out shadow-md">
+                    Explore APIs </a>
+                <a href="#" class="bg-white text-one-magenta px-8 py-3 rounded-full text-lg font-semibold border-2 border-one-magenta hover:bg-pink-50 transition duration-150 ease-in-out shadow-md">
+                    Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="api-products-section" class="py-6 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-gray-300 mb-6">
+               </h2>
+            <p class="text-center text-gray-600 mb-10"></p> <div id="api-filters" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6">
+                <button class="filter-button active px-4 py-2 border border-gray-300 rounded-full text-sm font-medium text-gray-700 hover:border-one-magenta hover:text-one-magenta transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-one-magenta" data-filter="all">All</button> <button class="filter-button px-4 py-2 border border-gray-300 rounded-full text-sm font-medium text-gray-700 hover:border-one-magenta hover:text-one-magenta transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-one-magenta" data-filter="plan-quote">Schedule</button> <button class="filter-button px-4 py-2 border border-gray-300 rounded-full text-sm font-medium text-gray-700 hover:border-one-magenta hover:text-one-magenta transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-one-magenta" data-filter="book-confirm">Prices</button> <button class="filter-button px-4 py-2 border border-gray-300 rounded-full text-sm font-medium text-gray-700 hover:border-one-magenta hover:text-one-magenta transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-one-magenta" data-filter="track-trace">Booking</button> <button class="filter-button px-4 py-2 border border-gray-300 rounded-full text-sm font-medium text-gray-700 hover:border-one-magenta hover:text-one-magenta transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-one-magenta" data-filter="documentation">Documentation</button> <button class="filter-button px-4 py-2 border border-gray-300 rounded-full text-sm font-medium text-gray-700 hover:border-one-magenta hover:text-one-magenta transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-one-magenta" data-filter="finance">Shipment</button> <button class="filter-button px-4 py-2 border border-gray-300 rounded-full text-sm font-medium text-gray-700 hover:border-one-magenta hover:text-one-magenta transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-one-magenta" data-filter="events">Finance</button> <button class="filter-button px-4 py-2 border border-gray-300 rounded-full text-sm font-medium text-gray-700 hover:border-one-magenta hover:text-one-magenta transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-one-magenta" data-filter="subscription">Subscription</button></div>
+
+            <div id="api-product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <div class="api-product-card bg-gray-50 rounded-lg shadow p-6 flex flex-col" data-category="track-trace">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-2">Track & Trace API</h4>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow">Get the latest status of your containers and shipments.</p> <div class="mb-3">
+                        <span class="inline-block bg-pink-100 text-one-magenta text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">DCSA Compliant</span> <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">PILOT</span> </div>
+                    <a href="#" class="text-one-magenta font-medium hover:underline block text-sm mt-auto">Learn More &rarr;</a> </div>
+
+                <div class="api-product-card bg-gray-50 rounded-lg shadow p-6 flex flex-col" data-category="book-confirm">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-2">Booking Request API</h4>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow">Submit your booking requests programmatically.</p> <div class="mb-3">
+                        <span class="inline-block bg-pink-100 text-one-magenta text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">DCSA Compliant</span> <span class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">V1.1.3</span> </div>
+                    <a href="#" class="text-one-magenta font-medium hover:underline block text-sm mt-auto">Learn More &rarr;</a> </div>
+
+                <div class="api-product-card bg-gray-50 rounded-lg shadow p-6 flex flex-col" data-category="plan-quote">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-2">Vessel Schedule API</h4>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow">Query real-time vessel schedules and port calls.</p> <div class="mb-3">
+                        <span class="inline-block bg-pink-100 text-one-magenta text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">OpenAPI 3.0.3</span> <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">V2.0.1</span> </div>
+                    <a href="#" class="text-one-magenta font-medium hover:underline block text-sm mt-auto">Learn More &rarr;</a> </div>
+
+                <div class="api-product-card bg-gray-50 rounded-lg shadow p-6 flex flex-col" data-category="plan-quote">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-2">Rate Inquiry API</h4>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow">Retrieve estimates for freight rates and charges.</p> <div class="mb-3">
+                        <span class="inline-block bg-pink-100 text-one-magenta text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">OpenAPI 3.0.3</span> <span class="inline-block bg-yellow-100 text-yellow-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Beta 1.0.1</span> </div>
+                    <a href="#" class="text-one-magenta font-medium hover:underline block text-sm mt-auto">Learn More &rarr;</a> </div>
+
+                 <div class="api-product-card bg-gray-50 rounded-lg shadow p-6 flex flex-col" data-category="documentation">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-2">Bill of Lading API</h4>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow">Retrieve detailed information from the Bill of Lading (B/L).</p> <div class="mb-3">
+                        <span class="inline-block bg-pink-100 text-one-magenta text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">DCSA Compliant</span> <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">V2.1.1</span> </div>
+                    <a href="#" class="text-one-magenta font-medium hover:underline block text-sm mt-auto">Learn More &rarr;</a> </div>
+
+                 <div class="api-product-card bg-gray-50 rounded-lg shadow p-6 flex flex-col" data-category="events">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-2">Event Subscription API</h4>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow">Subscribe to real-time shipment event notifications.</p> <div class="mb-3">
+                        <span class="inline-block bg-pink-100 text-one-magenta text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">OpenAPI 3.0.1</span> <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">PILOT</span> </div>
+                    <a href="#" class="text-one-magenta font-medium hover:underline block text-sm mt-auto">Learn More &rarr;</a> </div>
+
+                 </div>
+             <div id="no-results" class="text-center text-gray-500 mt-12 hidden">
+                No API products found for the selected category. </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+             <h2 class="text-3xl font-bold text-gray-800 mb-4">See What's Coming Next</h2> <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+                We are constantly working on new APIs and features. Check out our roadmap for future plans. </p>
+             <a href="#" class="bg-one-magenta text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-one-magenta-dark transition duration-150 ease-in-out shadow-md">
+                 View Roadmap </a>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white border-t border-gray-200">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+                <div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3">Get Started Quickly</h4> <p class="text-gray-600 mb-4">Follow our step-by-step guide to register and make your first API call.</p> <a href="#" class="text-one-magenta font-medium hover:underline">Read the Guide &rarr;</a> </div>
+                 <div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3">Authentication</h4> <p class="text-gray-600 mb-4">Learn about our authentication methods and how to get your API keys.</p> <a href="#" class="text-one-magenta font-medium hover:underline">Authentication Basics &rarr;</a> </div>
+                 <div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3">Need Help?</h4> <p class="text-gray-600 mb-4">Find answers in our FAQs or contact our support team.</p> <a href="#" class="text-one-magenta font-medium hover:underline">Visit Support Center &rarr;</a> </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-gray-400 py-8">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            &copy; 2025 Ocean Network Express Pte. Ltd. All Rights Reserved. | <a href="#" class="hover:text-white">Privacy Policy</a> | <a href="#" class="hover:text-white">Terms of Use</a> </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuButton && mobileMenu) {
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // API Product Filtering
+        const filterContainer = document.getElementById('api-filters');
+        const productGrid = document.getElementById('api-product-grid');
+        const productCards = productGrid ? productGrid.querySelectorAll('.api-product-card') : [];
+        const noResultsMessage = document.getElementById('no-results');
+
+        if (filterContainer && productGrid && productCards.length > 0 && noResultsMessage) {
+            filterContainer.addEventListener('click', (event) => {
+                // Ensure the click is directly on a button within the container
+                if (event.target.tagName === 'BUTTON' && event.target.classList.contains('filter-button')) {
+                    const filterValue = event.target.getAttribute('data-filter');
+
+                    // Update active button state
+                    const currentActive = filterContainer.querySelector('.filter-button.active');
+                    if (currentActive) {
+                        currentActive.classList.remove('active', 'bg-one-magenta', 'text-white', 'border-one-magenta');
+                        currentActive.classList.add('text-gray-700', 'border-gray-300'); // Reset non-active style
+                    }
+                    event.target.classList.add('active', 'bg-one-magenta', 'text-white', 'border-one-magenta');
+                    event.target.classList.remove('text-gray-700', 'border-gray-300');
+
+
+                    let hasVisibleProducts = false;
+                    // Filter product cards
+                    productCards.forEach(card => {
+                        const cardCategory = card.getAttribute('data-category');
+                        // Check if the card should be visible
+                        if (filterValue === 'all' || cardCategory === filterValue) {
+                            card.style.display = 'flex'; // Use flex to maintain layout consistency
+                            hasVisibleProducts = true;
+                        } else {
+                            card.style.display = 'none'; // Hide the card
+                        }
+                    });
+
+                     // Show/hide no results message
+                    if (hasVisibleProducts) {
+                        noResultsMessage.classList.add('hidden');
+                    } else {
+                        noResultsMessage.classList.remove('hidden');
+                    }
+                }
+            });
+             // Ensure initial state respects the 'active' button (All)
+            // Trigger a click on the 'All' button initially if needed, or ensure CSS handles initial display correctly.
+            // Current CSS (.api-product-card { display: flex; }) shows all initially.
+        } else {
+            console.error("Filter elements not found or no product cards present. Filtering will not work.");
+        }
+
+    </script>
+
+</body>
+</html>
