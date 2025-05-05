@@ -50,18 +50,18 @@
                 </div>
                 <div class="hidden md:flex items-center space-x-6">
                     <a href="/index.html#api-products-section" class="text-gray-600 hover:text-one-magenta font-medium">API Products</a>
-                    <a href="#" class="text-gray-600 hover:text-one-magenta font-medium">Documentation</a>
+                    <a href="#" class="text-gray-600 hover:text-one-magenta font-medium">APPs</a>
                     <a href="#" class="text-gray-600 hover:text-one-magenta font-medium">Roadmap</a>
                     <a href="#" class="text-gray-600 hover:text-one-magenta font-medium">Get Started</a>
                     <a href="#" class="text-gray-600 hover:text-one-magenta font-medium">Support</a>
                     <div class="relative hidden lg:block">
-                        <input type="text" placeholder="Search APIs & Docs..." class="px-4 py-1.5 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-one-magenta focus:border-transparent text-sm w-48">
+                        <input type="text" placeholder="Search" class="px-4 py-1.5 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-one-magenta focus:border-transparent text-sm w-48">
                         <svg class="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </div>
-                    <a href="#" class="text-gray-600 hover:text-one-magenta font-medium">Login</a>
-                    <a href="#" class="bg-one-magenta text-white px-4 py-1.5 rounded-full text-sm font-medium hover:bg-one-magenta-dark transition duration-150 ease-in-out">Register</a>
+                    <a href="#" class="text-gray-600 hover:text-one-magenta font-medium"></a>
+                    <a href="#" class="bg-one-magenta text-white px-4 py-1.5 rounded-full text-sm font-medium hover:bg-one-magenta-dark transition duration-150 ease-in-out">Login</a>
                 </div>
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-button-detail" class="text-gray-600 hover:text-one-magenta focus:outline-none">
@@ -102,9 +102,9 @@
         <div class="mb-10">
             <h1 class="text-4xl font-bold text-gray-800 mb-3">Track & Trace API <span class="text-xl font-normal text-gray-500">v1.2</span></h1>
             <div class="flex flex-wrap gap-2 mb-4">
-                <span class="inline-block bg-pink-100 text-one-magenta text-xs font-semibold px-2.5 py-0.5 rounded">DCSA Compliant (TNT 1.1)</span>
-                <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">Stable</span>
-                <span class="inline-block bg-gray-100 text-gray-800 text-xs font-semibold px-2.5 py-0.5 rounded">REST</span>
+                <span class="inline-block bg-pink-100 text-one-magenta text-xs font-semibold px-2.5 py-0.5 rounded">DCSA Compliant</span>
+                <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">V2.1.3</span>
+                <span class="inline-block bg-gray-100 text-gray-800 text-xs font-semibold px-2.5 py-0.5 rounded">MIX</span>
             </div>
             <p class="text-lg text-gray-600 max-w-3xl">
                 Retrieve real-time status updates and event history for your containers and shipments using Booking Number, Bill of Lading Number, or Container Number.
@@ -133,17 +133,14 @@
 
             <div>
                 <div class="tab-content active" id="overview">
-                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Overview</h2>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Description</h2>
                     <p class="text-gray-700 mb-4">
-                        The Track & Trace API provides visibility into the journey of your shipments. You can query the current status, location, and a detailed history of events associated with a specific container or booking. This allows for better planning, proactive exception management, and improved communication with stakeholders.
+                        Managing and sending Shipment-, Transport- and Equipment-events and subscriptions for Track & Trace (T&T). API specification issued by DCSA.org.
                     </p>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Key Features</h3>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">This API is accessible through</h3>
                     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
-                        <li>Query by Booking Number, B/L Number, or Container Number.</li>
-                        <li>Receive current shipment status (e.g., Gate Out, Loaded on Vessel, Discharged).</li>
-                        <li>Access detailed event history with timestamps and locations.</li>
-                        <li>Compliant with DCSA Track & Trace standards.</li>
-                        <li>Supports standard RESTful principles.</li>
+                        <li>Public connection (authentication with API Key): this allows to retrieve standard equipment moves (e.g. ready to be loaded, discharged), Transhipment moves (e.g. discharged and re-loaded onboard) and planned vessel departure and arrival dates.</li>
+                        <li>Private connection (authentication with Oauth2 client credentials): this allows to retrieve additional private events such as actual rail and ramp moves, planned departure and arrival dates for inland moves. These private events are available only if you (or your end customer) are identified on the booking as: Booking Party, Deciding Party, Consignee, Notifier or Shipper.</li>
                     </ul>
                     <h3 class="text-lg font-semibold text-gray-800 mb-2">Use Cases</h3>
                      <ul class="list-disc list-inside text-gray-700 space-y-1">
