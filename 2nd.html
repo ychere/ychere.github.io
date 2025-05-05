@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track & Trace API - ONE API Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+        }
+        /* ONE Magenta Color */
+        .bg-one-magenta { background-color: #E6007E; }
+        .text-one-magenta { color: #E6007E; }
+        .border-one-magenta { border-color: #E6007E; }
+        .hover\:bg-one-magenta-dark:hover { background-color: #c00068; }
+        .ring-one-magenta { --tw-ring-color: #E6007E; }
+
+        /* Custom styles for code blocks and tabs */
+        .tab-button.active {
+            border-bottom-color: #E6007E;
+            color: #E6007E;
+            font-weight: 600;
+        }
+        pre[class*="language-"] {
+            background: #2d2d2d; /* okaidia theme background */
+            border-radius: 0.375rem; /* rounded-md */
+            padding: 1rem;
+            overflow-x: auto;
+        }
+        code[class*="language-"] {
+             font-family: 'Courier New', Courier, monospace;
+             font-size: 0.875rem; /* text-sm */
+             line-height: 1.25rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex-shrink-0">
+                    <a href="/index.html" class="text-2xl font-bold text-one-magenta">ONE</a>
+                    <a href="/index.html" class="text-xl font-semibold text-gray-700">API Portal</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="/index.html#api-products-section" class="text-gray-600 hover:text-one-magenta font-medium">API Products</a>
+                    <a href="#" class="text-gray-600 hover:text-one-magenta font-medium">Documentation</a>
+                    <a href="#" class="text-gray-600 hover:text-one-magenta font-medium">Roadmap</a>
+                    <a href="#" class="text-gray-600 hover:text-one-magenta font-medium">Get Started</a>
+                    <a href="#" class="text-gray-600 hover:text-one-magenta font-medium">Support</a>
+                    <div class="relative hidden lg:block">
+                        <input type="text" placeholder="Search APIs & Docs..." class="px-4 py-1.5 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-one-magenta focus:border-transparent text-sm w-48">
+                        <svg class="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                    <a href="#" class="text-gray-600 hover:text-one-magenta font-medium">Login</a>
+                    <a href="#" class="bg-one-magenta text-white px-4 py-1.5 rounded-full text-sm font-medium hover:bg-one-magenta-dark transition duration-150 ease-in-out">Register</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button-detail" class="text-gray-600 hover:text-one-magenta focus:outline-none">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu-detail" class="md:hidden hidden mt-4 space-y-2">
+                 <input type="text" placeholder="Search APIs & Docs..." class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-one-magenta focus:border-transparent text-sm mb-2">
+                 <a href="/index.html#api-products-section" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-one-magenta hover:bg-gray-100">API Products</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-one-magenta hover:bg-gray-100">Documentation</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-one-magenta hover:bg-gray-100">Roadmap</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-one-magenta hover:bg-gray-100">Get Started</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-one-magenta hover:bg-gray-100">Support</a>
+                <hr class="my-2">
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-one-magenta hover:bg-gray-100">Login</a>
+                <a href="#" class="block w-full text-center bg-one-magenta text-white px-4 py-2 rounded-md text-base font-medium hover:bg-one-magenta-dark transition duration-150 ease-in-out">Register</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <nav class="text-sm mb-8" aria-label="Breadcrumb">
+            <ol class="list-none p-0 inline-flex space-x-2">
+                <li class="flex items-center">
+                    <a href="/index.html" class="text-gray-500 hover:text-one-magenta">API Portal Home</a>
+                    <svg class="fill-current w-3 h-3 mx-3 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg>
+                </li>
+                <li class="flex items-center">
+                    <span class="text-gray-700 font-medium">Track & Trace API</span>
+                </li>
+            </ol>
+        </nav>
+
+        <div class="mb-10">
+            <h1 class="text-4xl font-bold text-gray-800 mb-3">Track & Trace API <span class="text-xl font-normal text-gray-500">v1.2</span></h1>
+            <div class="flex flex-wrap gap-2 mb-4">
+                <span class="inline-block bg-pink-100 text-one-magenta text-xs font-semibold px-2.5 py-0.5 rounded">DCSA Compliant (TNT 1.1)</span>
+                <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">Stable</span>
+                <span class="inline-block bg-gray-100 text-gray-800 text-xs font-semibold px-2.5 py-0.5 rounded">REST</span>
+            </div>
+            <p class="text-lg text-gray-600 max-w-3xl">
+                Retrieve real-time status updates and event history for your containers and shipments using Booking Number, Bill of Lading Number, or Container Number.
+            </p>
+        </div>
+
+        <div class="bg-white p-6 sm:p-8 rounded-lg shadow-md">
+            <div class="border-b border-gray-200 mb-6">
+                <nav class="-mb-px flex space-x-6 overflow-x-auto" aria-label="Tabs"> <button class="tab-button active whitespace-nowrap py-3 px-1 border-b-2 border-transparent text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="overview">
+                        Overview
+                    </button>
+                    <button class="tab-button whitespace-nowrap py-3 px-1 border-b-2 border-transparent text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="reference">
+                        API Reference
+                    </button>
+                     <button class="tab-button whitespace-nowrap py-3 px-1 border-b-2 border-transparent text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="samples">
+                        Code Samples
+                    </button>
+                    <button class="tab-button whitespace-nowrap py-3 px-1 border-b-2 border-transparent text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="dcsa">
+                        DCSA Compliance
+                    </button>
+                     <button class="tab-button whitespace-nowrap py-3 px-1 border-b-2 border-transparent text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="changelog">
+                        Changelog
+                    </button>
+                </nav>
+            </div>
+
+            <div>
+                <div class="tab-content active" id="overview">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Overview</h2>
+                    <p class="text-gray-700 mb-4">
+                        The Track & Trace API provides visibility into the journey of your shipments. You can query the current status, location, and a detailed history of events associated with a specific container or booking. This allows for better planning, proactive exception management, and improved communication with stakeholders.
+                    </p>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Key Features</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                        <li>Query by Booking Number, B/L Number, or Container Number.</li>
+                        <li>Receive current shipment status (e.g., Gate Out, Loaded on Vessel, Discharged).</li>
+                        <li>Access detailed event history with timestamps and locations.</li>
+                        <li>Compliant with DCSA Track & Trace standards.</li>
+                        <li>Supports standard RESTful principles.</li>
+                    </ul>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Use Cases</h3>
+                     <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li>Real-time shipment visibility dashboards.</li>
+                        <li>Automated notifications for key shipment milestones.</li>
+                        <li>Supply chain planning and optimization.</li>
+                        <li>Customer service portals providing self-service tracking.</li>
+                    </ul>
+                </div>
+
+                <div class="tab-content hidden" id="reference">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">API Reference</h2>
+
+                    <div class="mb-6 border rounded-md overflow-hidden">
+                         <div class="bg-gray-100 px-4 py-2 border-b font-mono text-sm">
+                           <span class="font-semibold text-green-700">GET</span> /v1/track-trace/shipment-events
+                         </div>
+                         <div class="p-4">
+                            <p class="text-gray-700 mb-3">Retrieves shipment events based on provided query parameters.</p>
+                            <h4 class="text-md font-semibold text-gray-800 mb-2">Authentication</h4>
+                            <p class="text-gray-700 text-sm mb-3">Requires <code class="text-xs bg-gray-200 px-1 rounded">OAuth 2.0 Bearer Token</code> in the <code class="text-xs bg-gray-200 px-1 rounded">Authorization</code> header.</p>
+
+                            <h4 class="text-md font-semibold text-gray-800 mb-2">Query Parameters</h4>
+                            <div class="overflow-x-auto"> <table class="min-w-full divide-y divide-gray-200 text-sm mb-4">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th scope="col" class="px-4 py-2 text-left font-medium text-gray-500 uppercase tracking-wider">Parameter</th>
+                                            <th scope="col" class="px-4 py-2 text-left font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                                            <th scope="col" class="px-4 py-2 text-left font-medium text-gray-500 uppercase tracking-wider">Required</th>
+                                            <th scope="col" class="px-4 py-2 text-left font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        <tr>
+                                            <td class="px-4 py-2 whitespace-nowrap font-mono">bookingNumber</td>
+                                            <td class="px-4 py-2 whitespace-nowrap">String</td>
+                                            <td class="px-4 py-2 whitespace-nowrap">Conditional</td>
+                                            <td class="px-4 py-2">ONE Booking Reference. Required if B/L or Container # not provided.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-2 whitespace-nowrap font-mono">billOfLadingNumber</td>
+                                            <td class="px-4 py-2 whitespace-nowrap">String</td>
+                                            <td class="px-4 py-2 whitespace-nowrap">Conditional</td>
+                                            <td class="px-4 py-2">Bill of Lading Number. Required if Booking or Container # not provided.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-2 whitespace-nowrap font-mono">equipmentReference</td>
+                                            <td class="px-4 py-2 whitespace-nowrap">String</td>
+                                            <td class="px-4 py-2 whitespace-nowrap">Conditional</td>
+                                            <td class="px-4 py-2">Container Number (e.g., ONEU1234567). Required if Booking or B/L # not provided.</td>
+                                        </tr>
+                                         <tr>
+                                            <td class="px-4 py-2 whitespace-nowrap font-mono">eventDateTime[gte]</td>
+                                            <td class="px-4 py-2 whitespace-nowrap">String (ISO 8601)</td>
+                                            <td class="px-4 py-2 whitespace-nowrap">Optional</td>
+                                            <td class="px-4 py-2">Filter events greater than or equal to this timestamp.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h4 class="text-md font-semibold text-gray-800 mb-2">Example Response (200 OK)</h4>
+                            <pre><code class="language-json">{
+  "shipmentEvents": [
+    {
+      "eventID": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+      "eventClassifierCode": "ACT",
+      "eventDateTime": "2025-05-01T10:30:00Z",
+      "eventTypeCode": "LOAD",
+      "shipmentEventTypeCode": "LOAD",
+      "transportEventTypeCode": "ARRI",
+      "documentReferences": [
+        {
+          "documentReferenceType": "BKG",
+          "documentReferenceValue": "ABC123456789"
+        },
+        {
+          "documentReferenceType": "CBR",
+          "documentReferenceValue": "XYZ987654321"
+        }
+      ],
+      "references": [
+         {
+            "referenceType": "FF",
+            "referenceValue": "FORWARDER_REF_001"
+         }
+      ],
+      "eventLocation": {
+        "locationName": "Singapore Port",
+        "UNLocationCode": "SGSIN",
+        "facilityTypeCode": "PORT"
+      }
+    }
+    // ... more events
+  ]
+}</code></pre>
+
+                            <h4 class="text-md font-semibold text-gray-800 mt-4 mb-2">Error Responses</h4>
+                             <ul class="list-disc list-inside text-gray-700 text-sm space-y-1">
+                                <li><code class="text-xs bg-gray-200 px-1 rounded">400 Bad Request</code>: Invalid or missing query parameters.</li>
+                                <li><code class="text-xs bg-gray-200 px-1 rounded">401 Unauthorized</code>: Invalid or missing authentication token.</li>
+                                <li><code class="text-xs bg-gray-200 px-1 rounded">404 Not Found</code>: Shipment not found for the provided identifiers.</li>
+                                <li><code class="text-xs bg-gray-200 px-1 rounded">500 Internal Server Error</code>: Unexpected server error.</li>
+                            </ul>
+                         </div>
+                    </div>
+                    </div>
+
+                <div class="tab-content hidden" id="samples">
+                     <h2 class="text-2xl font-semibold text-gray-800 mb-4">Code Samples</h2>
+                     <p class="text-gray-700 mb-4">Here are some examples of how to call the Track & Trace API.</p>
+
+                     <h3 class="text-lg font-semibold text-gray-800 mb-2">cURL</h3>
+                     <pre><code class="language-bash">curl -X GET \
+'https://api.one-line.com/v1/track-trace/shipment-events?equipmentReference=ONEU1234567' \
+-H 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
+-H 'Accept: application/json'</code></pre>
+
+                     <h3 class="text-lg font-semibold text-gray-800 mt-6 mb-2">Python (requests)</h3>
+                     <pre><code class="language-python">import requests
+
+api_url = "https://api.one-line.com/v1/track-trace/shipment-events"
+access_token = "YOUR_ACCESS_TOKEN"
+container_number = "ONEU1234567"
+
+headers = {
+    "Authorization": f"Bearer {access_token}",
+    "Accept": "application/json"
+}
+
+params = {
+    "equipmentReference": container_number
+}
+
+try:
+    response = requests.get(api_url, headers=headers, params=params)
+    response.raise_for_status() # Raise an exception for bad status codes (4xx or 5xx)
+
+    data = response.json()
+    print(data)
+
+except requests.exceptions.RequestException as e:
+    print(f"API Request Error: {e}")
+except Exception as e:
+    print(f"An error occurred: {e}")
+</code></pre>
+
+                     <h3 class="text-lg font-semibold text-gray-800 mt-6 mb-2">JavaScript (fetch)</h3>
+                     <pre><code class="language-javascript">const apiUrl = 'https://api.one-line.com/v1/track-trace/shipment-events';
+const accessToken = 'YOUR_ACCESS_TOKEN';
+const containerNumber = 'ONEU1234567';
+
+const headers = new Headers({
+  'Authorization': `Bearer ${accessToken}`,
+  'Accept': 'application/json'
+});
+
+const url = new URL(apiUrl);
+url.searchParams.append('equipmentReference', containerNumber);
+
+fetch(url, { method: 'GET', headers: headers })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+  });
+</code></pre>
+                </div>
+
+                 <div class="tab-content hidden" id="dcsa">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">DCSA Compliance</h2>
+                    <p class="text-gray-700 mb-4">
+                        This API implementation adheres to the DCSA Standard for Track & Trace version 1.1.
+                    </p>
+                     <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                        <li><strong>Standard:</strong> DCSA Track & Trace Interface Standard</li>
+                        <li><strong>Version:</strong> 1.1</li>
+                        <li><strong>Official Documentation:</strong> <a href="https://dcsa.org/standards/track-and-trace/" target="_blank" rel="noopener noreferrer" class="text-one-magenta hover:underline">View on DCSA Website</a></li>
+                     </ul>
+                     <h3 class="text-lg font-semibold text-gray-800 mb-2">ONE Implementation Notes</h3>
+                     <p class="text-gray-700 mb-4">
+                        While aiming for full compliance, certain optional fields or specific interpretations might apply. Refer to the API Reference tab for the exact fields supported in this implementation. Any deviations or extensions beyond the DCSA standard will be clearly documented here or in the specific field descriptions.
+                     </p>
+                     </div>
+
+                <div class="tab-content hidden" id="changelog">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Changelog</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">Version 1.2 <span class="text-sm font-normal text-gray-500">(2025-04-15)</span></h3>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1 mt-1 text-sm">
+                                <li>Added optional <code class="text-xs bg-gray-200 px-1 rounded">eventDateTime[gte]</code> query parameter for filtering.</li>
+                                <li>Improved error message clarity for 404 Not Found responses.</li>
+                            </ul>
+                        </div>
+                         <div>
+                            <h3 class="text-lg font-semibold text-gray-800">Version 1.1 <span class="text-sm font-normal text-gray-500">(2024-11-01)</span></h3>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1 mt-1 text-sm">
+                                <li>Aligned response structure with DCSA TNT 1.1 standard.</li>
+                                <li>Deprecated older v1.0 event type codes.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">Version 1.0 <span class="text-sm font-normal text-gray-500">(2024-06-20)</span></h3>
+                             <ul class="list-disc list-inside text-gray-700 space-y-1 mt-1 text-sm">
+                                <li>Initial release of the Track & Trace API.</li>
+                                <li>Support for querying by Booking, B/L, and Container Number.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <div class="mt-10 pt-6 border-t border-gray-200 flex flex-col sm:flex-row gap-4">
+                 <a href="#" class="bg-one-magenta text-white px-6 py-2.5 rounded-md text-base font-medium hover:bg-one-magenta-dark transition duration-150 ease-in-out text-center">
+                    Get API Key
+                 </a>
+                 <a href="#" class="bg-gray-100 text-gray-700 px-6 py-2.5 rounded-md text-base font-medium border border-gray-300 hover:bg-gray-200 transition duration-150 ease-in-out text-center">
+                    Try in Sandbox
+                 </a>
+            </div>
+
+        </div> </main>
+
+    <footer class="bg-gray-800 text-gray-400 py-8 mt-16">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            &copy; 2025 Ocean Network Express Pte. Ltd. All Rights Reserved. | <a href="#" class="hover:text-white">Privacy Policy</a> | <a href="#" class="hover:text-white">Terms of Use</a>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+    <script>
+        // Mobile Menu Toggle (Detail Page Specific ID)
+        const menuButtonDetail = document.getElementById('mobile-menu-button-detail');
+        const mobileMenuDetail = document.getElementById('mobile-menu-detail');
+        if (menuButtonDetail && mobileMenuDetail) {
+            menuButtonDetail.addEventListener('click', () => {
+                mobileMenuDetail.classList.toggle('hidden');
+            });
+        }
+
+        // Tab Switching Logic
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+
+                // Deactivate all buttons and hide all content
+                tabButtons.forEach(btn => {
+                    btn.classList.remove('active', 'text-one-magenta', 'border-one-magenta', 'font-semibold');
+                    btn.classList.add('text-gray-500', 'border-transparent'); // Reset styles
+                });
+                tabContents.forEach(content => {
+                    content.classList.add('hidden');
+                    content.classList.remove('active'); // Ensure only one active content
+                });
+
+                // Activate the clicked button and show corresponding content
+                button.classList.add('active', 'text-one-magenta', 'border-one-magenta', 'font-semibold');
+                button.classList.remove('text-gray-500', 'border-transparent');
+                const activeContent = document.getElementById(tabId);
+                if (activeContent) {
+                    activeContent.classList.remove('hidden');
+                    activeContent.classList.add('active');
+                }
+
+                // Re-highlight code blocks if necessary (Prism might need this)
+                if (typeof Prism !== 'undefined' && activeContent) { // Check if activeContent exists
+                    Prism.highlightAllUnder(activeContent);
+                }
+            });
+        });
+
+         // Ensure the first tab's content is visible on load and highlighted
+        const initialActiveTab = document.querySelector('.tab-button.active');
+        if (initialActiveTab) {
+            const initialTabId = initialActiveTab.getAttribute('data-tab');
+            const initialActiveContent = document.getElementById(initialTabId);
+            if (initialActiveContent) {
+                 initialActiveContent.classList.remove('hidden');
+                 initialActiveContent.classList.add('active');
+                 // Highlight code in the initially active tab
+                 if (typeof Prism !== 'undefined') {
+                    Prism.highlightAllUnder(initialActiveContent);
+                 }
+            }
+        }
+
+    </script>
+
+</body>
+</html>
