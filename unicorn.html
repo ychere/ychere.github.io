@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONE Industry Solutions Showcase</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth; /* Ensures smooth scrolling for anchor links */
+        }
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background-color: #F8F9FA; /* Light grey background */
+        }
+        .one-magenta { color: #E6007E; }
+        .bg-one-magenta { background-color: #E6007E; }
+        .border-one-magenta { border-color: #E6007E; }
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            margin-right: 0.5rem;
+            border-radius: 0.5rem 0.5rem 0 0;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            color: #4A5568; /* Tailwind gray-700 */
+            background-color: #E2E8F0; /* Tailwind gray-300 */
+        }
+        .tab-button.active {
+            background-color: #E6007E;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+            background-color: white;
+            border-radius: 0 0.5rem 0.5rem 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .content-section {
+            padding: 2rem;
+            background-color: #FFFFFF;
+            border-radius: 0.5rem;
+        }
+        .content-section h2 {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #E6007E;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #E6007E;
+            padding-bottom: 0.75rem;
+        }
+         .content-section h3 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #333333;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .content-section p, .content-section ul {
+            color: #4A5568;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        .content-section ul {
+            list-style-position: inside;
+            padding-left: 0.5rem;
+        }
+        .content-section li {
+            margin-bottom: 0.5rem;
+        }
+        .tile {
+            background-color: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 220px;
+        }
+        .tile:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .tile svg {
+            width: 3.5rem;
+            height: 3.5rem;
+            margin-bottom: 1rem;
+            color: #E6007E;
+        }
+        .tile h3 {
+            font-size: 1.125rem;
+            font-weight: bold;
+            color: #E6007E;
+            margin-bottom: 0.5rem;
+        }
+        .tile p {
+            font-size: 0.875rem;
+            color: #4A5568;
+            line-height: 1.5;
+        }
+        .btn-primary {
+            background-color: #E6007E;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            background-color: #c00065;
+        }
+        .btn-secondary {
+            background-color: #4A5568;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .btn-secondary:hover {
+            background-color: #2D3748;
+        }
+
+        .cms-page { display: none; }
+        .cms-page.active { display: block; }
+        .cms-hero {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .cms-hero h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background-color: rgba(0,0,0,0.5);
+            padding: 1rem 2rem;
+            border-radius: 0.375rem;
+        }
+        
+        .l3-sticky-subnav {
+            position: sticky;
+            top: 0;
+            background-color: white;
+            z-index: 10;
+            padding: 1rem 0;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            flex-wrap: wrap; /* Allow nav items to wrap on smaller screens */
+        }
+        .l3-subnav-item {
+            padding: 0.5rem 1rem;
+            color: #4A5568;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 0.375rem;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            border: 2px solid transparent;
+        }
+        .l3-subnav-item.active, .l3-subnav-item:hover {
+            color: #E6007E;
+            background-color: #fce7f3;
+            border-color: #E6007E;
+        }
+        .l3-content-section {
+            padding-top: 2rem; 
+            margin-bottom: 2rem;
+            scroll-margin-top: 100px; /* Increased to ensure title is not hidden by potentially taller sticky nav */
+            border-bottom: 1px dashed #cbd5e1;
+            padding-bottom: 2rem;
+        }
+        .l3-content-section:last-child {
+            border-bottom: none;
+        }
+
+        .one-logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #E6007E;
+        }
+
+        .diagram-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .diagram-card {
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border-width: 1px 1px 1px 5px; /* Standard border + thicker left border */
+            border-style: solid;
+        }
+        /* Tier 1 Competitor Styling */
+        .diagram-card.tier-1 {
+            background-color: #FFF0F5; /* Lavender blush - a very light pink/magenta */
+            border-color: #E6007E; /* Magenta border */
+        }
+        /* Tier 2 Competitor Styling */
+        .diagram-card.tier-2 {
+            background-color: #E0F2FE; /* Light Sky Blue */
+            border-color: #0EA5E9; /* Sky Blue 500 */
+        }
+        /* Tier 3 Competitor Styling */
+        .diagram-card.tier-3 {
+            background-color: #F8F9FA; /* gray-100 */
+            border-color: #A0AEC0; /* gray-400 */
+        }
+
+        .diagram-card svg {
+            width: 3rem;
+            height: 3rem;
+            color: #E6007E;
+            margin-bottom: 1rem;
+        }
+         .diagram-card img.competitor-logo { /* Specific styling for competitor logos */
+            width: 48px; /* 3rem */
+            height: 48px; /* 3rem */
+            margin-bottom: 1rem;
+            border-radius: 50%; /* Make logos circular */
+            object-fit: contain; /* Ensure logo fits well */
+            background-color: white; /* Add a white background if logos are transparent */
+            padding: 0.25rem; /* Small padding around logo */
+        }
+        .diagram-card h4 {
+            font-size: 1.125rem;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+        .diagram-card p {
+            font-size: 0.9rem;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+        
+        /* Our Commitment section text color */
+        .commitment-section p, .commitment-section h3 {
+            color: white !important; /* Override default paragraph/heading colors */
+        }
+
+
+        .mega-menu-container {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            max-width: 350px;
+            margin: 2rem auto;
+        }
+        .mega-menu-header {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #E6007E;
+            padding-bottom: 0.75rem;
+            margin-bottom: 0.75rem;
+            border-bottom: 2px solid #E6007E;
+        }
+        .mega-menu-item {
+            display: block;
+            padding: 0.6rem 0.75rem; /* Adjusted padding */
+            color: #4A5568;
+            border-radius: 0.25rem;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            font-weight: bold; /* Make top-level items bold */
+        }
+        .mega-menu-item:hover {
+            background-color: #f0f0f0;
+        }
+        .mega-menu-item.active-parent { /* For items like Transportation Solutions if it were expandable */
+            background-color: #e2e8f0;
+            color: #2d3748;
+        }
+        .mega-menu-subitem {
+            display: block;
+            padding: 0.5rem 0.75rem 0.5rem 2rem; /* Indent sub-items */
+            color: #4A5568;
+            border-radius: 0.25rem;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            font-weight: normal; /* Sub-items normal weight */
+        }
+        .mega-menu-subitem:hover {
+            background-color: #f0f0f0;
+        }
+        .mega-menu-item svg.dropdown-arrow {
+            width: 1rem;
+            height: 1rem;
+            display: inline-block;
+            margin-left: 0.25rem;
+            vertical-align: middle;
+            transition: transform 0.2s;
+        }
+        .mega-menu-item.expanded svg.dropdown-arrow {
+            transform: rotate(-180deg);
+        }
+        .mega-menu-industry-list {
+            padding-left: 1rem; /* Indent industry list slightly */
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .mega-menu-item.expanded + .mega-menu-industry-list {
+            max-height: 500px; /* Adjust as needed to fit all items */
+        }
+
+
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <header class="mb-8 flex items-center justify-between">
+        <div>
+            <h1 class="one-logo">ONE</h1>
+            <p class="text-gray-600">Industry Solutions Showcase</p>
+        </div>
+    </header>
+
+    <div id="tabs-container" class="mb-8">
+        <button class="tab-button active" onclick="openTab(event, 'competitive-landscape')">1. Competitive Landscape</button>
+        <button class="tab-button" onclick="openTab(event, 'one-strategy')">2. ONE Strategy</button>
+        <button class="tab-button" onclick="openTab(event, 'sample-pages')">3. Sample Pages (CMS Demo)</button>
+    </div>
+
+    <div id="competitive-landscape" class="tab-content active">
+        <div class="content-section">
+            <h2>The Evolving Landscape of Industry-Specific Logistics Content</h2>
+            <p>The shipping industry is increasingly adopting targeted content strategies to address the unique needs of different sectors. Here's a visual look at key trends and competitor approaches based on their industry content commitment:</p>
+
+            <h3>Key Trends in Industry Content</h3>
+            <div class="diagram-container">
+                <div class="diagram-card tier-3"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 5.25 6h1.5c.668 0 1.231.306 1.608.779a48.409 48.409 0 0 1-1.478-.197m-1.518 .664-.018.032c-.004.004-.007.007-.01.011a2.25 2.25 0 0 1-.224-.67c.011-.004.007-.007.004-.011L4.08 3.9A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" /></svg>
+                    <h4>Dedicated Industry Sections</h4>
+                    <p>Leading carriers feature prominent "Industry" sections, signaling a strategic focus on vertical markets.</p>
+                </div>
+                <div class="diagram-card tier-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h12A2.25 2.25 0 0 0 20.25 14.25V3M3.75 21h16.5M16.5 3.75h.008v.008H16.5V3.75Z" /></svg>
+                    <h4>Solution-Oriented Content</h4>
+                    <p>Shift from generic listings to detailed explanations of how specific industry challenges are addressed.</p>
+                </div>
+                <div class="diagram-card tier-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                    <h4>Value-Driven Messaging</h4>
+                    <p>Emphasis on tangible benefits like reliability, efficiency, risk mitigation, and compliance.</p>
+                </div>
+                <div class="diagram-card tier-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" /></svg>
+                    <h4>Integration with Core Themes</h4>
+                    <p>Linking industry solutions to sustainability, digitalization, and supply chain resilience.</p>
+                </div>
+                <div class="diagram-card tier-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.174C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.174 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039H7.87a2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" /></svg>
+                    <h4>Enhanced User Experience (UX)</h4>
+                    <p>Use of multimedia, intuitive navigation, and mobile-responsive design for engagement.</p>
+                </div>
+                 <div class="diagram-card tier-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 11.667 0l3.181-3.183m-4.994 0c-2.613-2.613-2.613-6.855 0-9.468l3.18-3.182m0 0c2.613-2.613 6.855-2.613 9.468 0l3.181 3.182m0 0H12.27m0 0 3.181 3.182M6.056 2.075L2.875 5.25m0 0L.7 3.125M3.375 19.5 1.5 21m0 0L.7 18.375m1.5-15L5.25 1.5" /></svg>
+                    <h4>Content as a Strategic Tool</h4>
+                    <p>Employed for lead generation, demonstrating expertise, and achieving competitive differentiation.</p>
+                </div>
+            </div>
+
+            <h3 class="mt-12">Competitor Snapshot: Commitment to Industry-Specific Content</h3>
+            <div class="diagram-container">
+                <div class="diagram-card tier-1">
+                    <img src="https://placehold.co/60x60/002E6D/FFFFFF?text=M" alt="Maersk Logo" class="competitor-logo">
+                    <h4>Maersk</h4>
+                    <p>Comprehensive "By Industry" section with in-depth content, insights, and case studies. Strong integration with digitalization and sustainability themes.</p>
+                </div>
+                <div class="diagram-card tier-1">
+                    <img src="https://placehold.co/60x60/FFC72C/000000?text=MSC" alt="MSC Logo" class="competitor-logo">
+                    <h4>MSC</h4>
+                    <p>Dedicated "Industries" section detailing specialized equipment, processes (e.g., GDP compliance for pharma), and tailored solutions for a wide array of industries.</p>
+                </div>
+
+                <div class="diagram-card tier-2">
+                    <img src="https://placehold.co/60x60/0055A4/FFFFFF?text=CMA" alt="CMA CGM Logo" class="competitor-logo">
+                    <h4>CMA CGM</h4>
+                    <p>Industry focus often channeled via CEVA Logistics (subsidiary), emphasizing end-to-end, customized logistics solutions.</p>
+                </div>
+                <div class="diagram-card tier-2">
+                     <img src="https://placehold.co/60x60/009B3A/FFFFFF?text=EGL" alt="Evergreen Logo" class="competitor-logo">
+                    <h4>Evergreen Line</h4>
+                    <p>U.S. site has an "Industry" section (E-Bulletins/regulations). Global industry messaging often via corporate announcements (fleet, sustainability).</p>
+                </div>
+
+                <div class="diagram-card tier-3">
+                    <img src="https://placehold.co/60x60/004E98/FFFFFF?text=COS" alt="COSCO Logo" class="competitor-logo">
+                    <h4>COSCO Shipping</h4>
+                    <p>Focus on specialized cargo types (Fresh, Special, LCL) on its `world.lines` subdomain, implicitly catering to various industries.</p>
+                </div>
+                <div class="diagram-card tier-3">
+                     <img src="https://placehold.co/60x60/F37021/FFFFFF?text=HL" alt="Hapag-Lloyd Logo" class="competitor-logo">
+                    <h4>Hapag-Lloyd</h4>
+                    <p>Addresses industry needs implicitly via "Digital Insights Dock" (e.g., reefer guides), emphasizing digital tools and service quality for all.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="one-strategy" class="tab-content">
+        <div class="content-section">
+            <h2>ONE's Approach: Powering Your Business Across Industries</h2>
+            
+            <div class="text-center mb-10">
+                <svg class="w-16 h-16 mx-auto mb-4 one-magenta" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                </svg>
+                <h3 class="text-2xl font-semibold text-gray-700">Our Philosophy</h3>
+                <p class="mt-2 max-w-2xl mx-auto">ONE is committed to supporting the diverse needs of global businesses. Our core strategy focuses on delivering exceptional, foundational logistics services that empower every client. We aim to provide a robust platform adaptable to your unique requirements.</p>
+            </div>
+
+            <h3 class="text-center text-xl font-semibold text-gray-700 mb-8">Leveraging Our Strengths for Your Benefit:</h3>
+            <div class="diagram-container">
+                 <div class="diagram-card tier-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" /></svg>
+                    <h4>Operational Excellence</h4>
+                    <p>Rooted in Japanese heritage, prioritizing efficiency, reliability, and meticulous service for smooth cargo movement.</p>
+                </div>
+                <div class="diagram-card tier-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+                    <h4>Global Network & Alliances</h4>
+                    <p>Extensive global coverage via "THE Alliance," connecting you to major markets with comprehensive service.</p>
+                </div>
+                <div class="diagram-card tier-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5h10.5v3.75m-3.75 0h3.75M6.75 11.25h10.5m0 0v3.75m0-3.75L13.5 7.5M6.75 11.25L9.75 15m0 0L13.5 11.25m-3.75 0L9.75 7.5M6.75 15h10.5M12 18.75a.375.375 0 1 0 0-.75.375.375 0 0 0 0 .75Z" /></svg>
+                    <h4>Digital Innovation</h4>
+                    <p>Advancing digitalization (e.g., ONE QUOTE) for enhanced visibility, simplified processes, and greater control.</p>
+                </div>
+                <div class="diagram-card tier-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.94-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.06 2.772m10.12 0L12 12.75M12 12.75l-5.06 2.772M6 18.719v-.75a2.25 2.25 0 0 1 2.25-2.25h3.5m10.12 0a.75.75 0 0 0 .75-.75V12a1.5 1.5 0 0 0-1.5-1.5H5.625c-.621 0-1.125.504-1.125 1.125v6.086c0 .507.311.958.75 1.125S5.062 18 5.25 18.461M6 18.719a2.25 2.25 0 0 1-.25-1.475M18 18.72a2.25 2.25 0 0 0 .25-1.475m-12 0v.75c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125v-.75" /></svg>
+                    <h4>Customer-Centricity</h4>
+                    <p>Building collaborative partnerships, understanding unique needs, and providing responsive, flexible solutions.</p>
+                </div>
+                <div class="diagram-card tier-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21V3M12 3a9.004 9.004 0 0 0-8.716 6.747M12 3a9.004 9.004 0 0 1 8.716 6.747m-17.432 0h17.432M5.636 5.636h12.728M5.636 18.364h12.728" /></svg>
+                    <h4>Sustainable Solutions</h4>
+                    <p>Committed to environmentally responsible shipping (e.g., ONE LEAF+) for greener logistics options.</p>
+                </div>
+            </div>
+
+            <div class="mt-12 p-6 bg-one-magenta rounded-lg shadow-lg text-center commitment-section">
+                <h3>Our Commitment</h3>
+                <p class="max-w-3xl mx-auto">ONE provides a robust and agile shipping platform, adaptable to various sector demands. While we may not offer the same breadth of specialized vertical solutions as some, our strength lies in consistent high-level service, reliability, and digital convenience, forming a strong backbone for your supply chain.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="sample-pages" class="tab-content">
+        <div id="cms-l1" class="cms-page active">
+            <div class="content-section">
+                <div class="cms-hero" style="background-image: url('https://placehold.co/1200x400/E6007E/FFFFFF?text=Global+Solutions,+Industry+Focus');">
+                    <h1>Industry-Focused Transportation Solutions</h1>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start"> <div>
+                        <h2>Tailored Approaches for Your Unique Sector</h2>
+                        <p>At Ocean Network Express (ONE), we understand that each industry faces distinct logistical challenges and opportunities. While our comprehensive transportation solutions are designed to serve a broad range of cargo types, we are increasingly focusing on how our core strengths in operational excellence, global connectivity, and digital innovation can be tailored to meet the specific demands of key sectors.</p>
+                        <p>Our goal is to provide not just shipping services, but intelligent logistics partnerships that help your business thrive. We leverage our global network and commitment to reliability to ensure your supply chain is resilient, efficient, and aligned with your industry's pace.</p>
+                        <p>Discover how ONE is working to support businesses like yours by exploring our developing industry focus areas.</p>
+                        <a href="#" class="btn-primary mt-4" onclick="navigateToL2()">Explore Our Industry Focus Areas</a>
+                    </div>
+                    <div class="mega-menu-container">
+                        <h3 class="mega-menu-header">Services</h3>
+                        <a href="#" class="mega-menu-item">Service Maps</a>
+                        <a href="#" class="mega-menu-item">
+                            Transportation Solutions
+                            </a>
+                        <div class="mega-menu-item" id="industrySolutionsMenu" onclick="toggleIndustryMenu(this)">
+                            Industry Solutions
+                            <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.23 8.29a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
+                        </div>
+                        <div class="mega-menu-industry-list">
+                            <a href="#" class="mega-menu-subitem" onclick="navigateToL3('automotive'); return false;">Automotive</a>
+                            <a href="#" class="mega-menu-subitem" onclick="navigateToL3('agriculture'); return false;">Agriculture</a>
+                            <a href="#" class="mega-menu-subitem" onclick="navigateToL3('chemicals'); return false;">Chemicals</a>
+                            <a href="#" class="mega-menu-subitem" onclick="navigateToL3('electronics'); return false;">Electronics & White Goods</a>
+                            <a href="#" class="mega-menu-subitem" onclick="navigateToL3('fmcg'); return false;">FMCG</a>
+                            <a href="#" class="mega-menu-subitem" onclick="navigateToL3('industrial'); return false;">Industrial & Machinery</a>
+                            <a href="#" class="mega-menu-subitem" onclick="navigateToL3('perishables'); return false;">Perishables</a>
+                            <a href="#" class="mega-menu-subitem" onclick="navigateToL3('pharma'); return false;">Pharma & Healthcare</a>
+                            <a href="#" class="mega-menu-subitem" onclick="navigateToL3('retail'); return false;">Retail</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="cms-l2" class="cms-page">
+            <div class="content-section">
+                <div class="flex justify-between items-center mb-6">
+                    <h2>Explore Our Industry Focus Areas</h2>
+                    <button class="btn-secondary" onclick="navigateToL1()">Back to Solutions Overview</button>
+                </div>
+                <p class="mb-8 text-gray-600">ONE is dedicated to enhancing its services to better meet the specialized needs of various industries. Click on an area below to learn more about our approach and capabilities.</p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+                    <div class="tile" onclick="navigateToL3('automotive')">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.125-.504 1.125-1.125V14.25m-17.25 4.5H1.5V8.25A2.25 2.25 0 0 1 3.75 6h16.5A2.25 2.25 0 0 1 22.5 8.25v6.75M18 14.25a2.25 2.25 0 0 0-2.25-2.25H8.25A2.25 2.25 0 0 0 6 14.25m12 0a2.25 2.25 0 0 1-2.25-2.25H8.25a2.25 2.25 0 0 1-2.25 2.25M6 10.5h12M6 10.5a2.25 2.25 0 0 0-2.25-2.25H3.75A2.25 2.25 0 0 0 1.5 10.5m19.5 0a2.25 2.25 0 0 1-2.25-2.25H20.25a2.25 2.25 0 0 1-2.25 2.25M1.5 10.5V8.25A2.25 2.25 0 0 1 3.75 6M22.5 10.5V8.25A2.25 2.25 0 0 0 20.25 6" /></svg>
+                        <h3>Automotive</h3><p>Reliable logistics for the dynamic automotive supply chain, from parts to finished vehicles.</p>
+                    </div>
+                    <div class="tile" onclick="navigateToL3('agriculture')">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 19.5L3 19.5m0 0l3.306-3.306a4.5 4.5 0 016.364 0L15 19.5m-12 0h1.5v-1.5m10.5 1.5h1.5V12A2.25 2.25 0 0013.5 9.75V9.75A2.25 2.25 0 0011.25 12v7.5m3-7.5V9A2.25 2.25 0 0012 6.75h0A2.25 2.25 0 009.75 9v.75m5.25 3.75H9M8.25 4.502A2.25 2.25 0 0110.5 2.25h3A2.25 2.25 0 0115.75 4.5v3.459c0 .533-.213 1.036-.593 1.407L12 12.75l-3.157-3.334a1.495 1.495 0 01-.593-1.407V4.502z" /></svg>
+                        <h3>Agriculture</h3><p>Supporting the global food supply chain with reliable transport for agricultural products.</p>
+                    </div>
+                    <div class="tile" onclick="navigateToL3('chemicals')">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V7.5A2.25 2.25 0 0018 5.25H6A2.25 2.25 0 003.75 7.5v10.5A2.25 2.25 0 006 20.25z" /></svg>
+                        <h3>Chemicals</h3><p>Safe and compliant transportation solutions for a wide range of chemical products.</p>
+                    </div>
+                    <div class="tile" onclick="navigateToL3('electronics')">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15A2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" /></svg>
+                        <h3>Electronics & White Goods</h3><p>Secure transport for high-value electronics and appliances, ensuring supply chain integrity.</p>
+                    </div>
+                    <div class="tile" onclick="navigateToL3('fmcg')">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" /></svg>
+                        <h3>FMCG</h3><p>Supporting fast-moving consumer goods with timely and flexible shipping services.</p>
+                    </div>
+                    <div class="tile" onclick="navigateToL3('industrial')">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h6M9 11.25h6M9 15.75h6" /></svg>
+                        <h3>Industrial & Machinery</h3><p>Logistics for heavy and oversized industrial equipment and machinery components.</p>
+                    </div>
+                    <div class="tile" onclick="navigateToL3('perishables')">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9.75 4.062c.155.03.315.047.48.047.175 0 .335-.017.495-.052A3.752 3.752 0 0 0 15 15.25V15h1.5a.75.75 0 0 0 0-1.5H15v-.25c0-.966-.784-1.75-1.75-1.75h-2.5A1.75 1.75 0 0 0 9 13v.25H7.5a.75.75 0 0 0 0 1.5H9v.25a3.752 3.752 0 0 0 2.25 3.312Z M12 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" /></svg>
+                        <h3>Perishables</h3><p>Specialized reefer cargo solutions for temperature-sensitive goods.</p>
+                    </div>
+                    <div class="tile" onclick="navigateToL3('pharma')">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <h3>Pharma & Healthcare</h3><p>Temperature-controlled and compliant solutions for pharmaceutical and healthcare products.</p>
+                    </div>
+                    <div class="tile" onclick="navigateToL3('retail')">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5A2.25 2.25 0 0011.25 11.25H6.75A2.25 2.25 0 004.5 13.5V21M6.75 21H11.25c1.242 0 2.25-.078 2.25-.078s1.008.078 2.25.078c1.242 0 2.25-1.008 2.25-2.25V13.5A2.25 2.25 0 0015.75 11.25h-1.5m-3 0h3m-3.75 3.75h3.75M3 13.5h3.75m0 0h3.75m0 0h3.75M3 13.5V9A2.25 2.25 0 015.25 6.75h9.75c1.243 0 2.25 1.007 2.25 2.25v4.5" /></svg>
+                        <h3>Retail</h3><p>Agile and responsive logistics to meet the dynamic demands of the retail sector.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="cms-l3-automotive" class="cms-page industry-detail-page">
+            <div class="content-section">
+                <div class="cms-hero" style="background-image: url('https://placehold.co/1200x400/333333/FFFFFF?text=Automotive+Logistics');">
+                    <h1>Driving Your Automotive Supply Chain Forward</h1>
+                </div>
+                <div class="flex justify-start my-6"> <button class="btn-secondary" onclick="navigateToL2()">Back to Industry Focus Areas</button>
+                </div>
+
+                <div class="l3-sticky-subnav">
+                    <span class="l3-subnav-item active" onclick="scrollToL3Section('auto-overview')">Overview</span>
+                    <span class="l3-subnav-item" onclick="scrollToL3Section('auto-solutions')">Our Solutions</span>
+                    <span class="l3-subnav-item" onclick="scrollToL3Section('auto-whyone')">Why ONE?</span>
+                    <span class="l3-subnav-item" onclick="scrollToL3Section('auto-insights')">Insights</span>
+                    <span class="l3-subnav-item" onclick="scrollToL3Section('auto-contact')">Contact Us</span>
+                </div>
+
+                <div id="auto-overview" class="l3-content-section">
+                    <h3>Overview: Navigating Automotive Logistics</h3>
+                    <p>The automotive industry operates on precision, speed, and global integration. From sourcing components worldwide to delivering finished vehicles to market, a resilient and efficient supply chain is paramount. Key challenges include managing just-in-time (JIT) deliveries, ensuring the safety of high-value parts, and navigating complex global trade regulations.</p>
+                    <p>ONE understands the critical nature of automotive logistics. We aim to provide dependable shipping services that support the intricate network of automotive manufacturing and distribution, helping you maintain production schedules and meet market demands.</p>
+                </div>
+                <div id="auto-solutions" class="l3-content-section">
+                    <h3>Our Solutions for the Automotive Sector</h3>
+                    <ul>
+                        <li><strong>Reliable Global Shipping:</strong> Extensive network coverage for seamless transportation of automotive parts, components, and finished vehicles across continents.</li>
+                        <li><strong>Diverse Container Fleet:</strong> Access to a wide range of container types suitable for various automotive cargo, including specialized equipment for out-of-gauge or sensitive items.</li>
+                        <li><strong>Advanced Digital Tracking:</strong> Enhanced visibility through our digital platforms, allowing you to monitor your shipments in real-time and manage your inventory effectively.</li>
+                        <li><strong>Schedule Integrity Focus:</strong> Commitment to maintaining schedule reliability to support your JIT production models and minimize supply chain disruptions.</li>
+                        <li><strong>Dedicated Customer Support:</strong> Experienced teams available to assist with your specific automotive logistics requirements and provide tailored support.</li>
+                    </ul>
+                </div>
+                <div id="auto-whyone" class="l3-content-section">
+                    <h3>Why Choose ONE for Automotive Logistics?</h3>
+                    <ul>
+                        <li><strong>Operational Excellence:</strong> Our foundation in Japanese shipping heritage translates to meticulous planning and execution, crucial for the demanding automotive sector.</li>
+                        <li><strong>Extensive Network via THE Alliance:</strong> Benefit from one of the largest and most comprehensive service networks in the shipping industry, ensuring broad reach and flexible options.</li>
+                        <li><strong>Commitment to Reducing Complexity:</strong> We strive to simplify your logistics processes through efficient operations and user-friendly digital tools.</li>
+                        <li><strong>Customer-Centric Approach:</strong> We work closely with you to understand your automotive supply chain needs and develop solutions that add value.</li>
+                        <li><strong>Focus on Sustainability:</strong> Partner with a carrier committed to reducing environmental impact, aligning with the automotive industry's growing emphasis on sustainability.</li>
+                    </ul>
+                </div>
+                <div id="auto-insights" class="l3-content-section">
+                    <h3>Automotive Logistics Insights</h3>
+                    <p>Stay informed on the latest trends, challenges, and innovations in automotive logistics. ONE is actively monitoring market developments and exploring new ways to enhance our services for the automotive sector.</p>
+                    <p><em>(Placeholder: Future content could include articles on EV logistics, supply chain resilience in automotive, or impacts of new trade policies.)</em></p>
+                    <a href="#" class="btn-primary mt-2">Read ONE's Latest Insights (Coming Soon)</a>
+                </div>
+                <div id="auto-contact" class="l3-content-section">
+                    <h3>Connect with Our Automotive Specialists</h3>
+                    <p>Have specific questions about your automotive logistics needs? Our team is ready to discuss how ONE can support your supply chain.</p>
+                    <p>Contact us today for a consultation or a customized quote.</p>
+                    <a href="#" class="btn-primary mt-2">Contact Automotive Team</a>
+                </div>
+            </div>
+        </div>
+        
+        <div id="cms-l3-agriculture" class="cms-page industry-detail-page"><div class="content-section"><div class="cms-hero" style="background-image: url('https://placehold.co/1200x400/333333/FFFFFF?text=Agriculture+Logistics');"><h1>Supporting Global Agriculture</h1></div><button class="btn-secondary my-4" onclick="navigateToL2()">Back to Industry Focus Areas</button><div class="l3-sticky-subnav"><span class="l3-subnav-item active" onclick="scrollToL3Section('agri-overview-placeholder')">Overview</span></div><div id="agri-overview-placeholder" class="l3-content-section"><p class="p-8 text-center text-gray-600">Detailed content for Agriculture coming soon. ONE provides reliable transport solutions for agricultural products, connecting farmers to global markets and supporting the food supply chain.</p></div></div></div>
+        <div id="cms-l3-chemicals" class="cms-page industry-detail-page"><div class="content-section"><div class="cms-hero" style="background-image: url('https://placehold.co/1200x400/333333/FFFFFF?text=Chemicals+Logistics');"><h1>Safe Chemical Transportation</h1></div><button class="btn-secondary my-4" onclick="navigateToL2()">Back to Industry Focus Areas</button><div class="l3-sticky-subnav"><span class="l3-subnav-item active" onclick="scrollToL3Section('chem-overview-placeholder')">Overview</span></div><div id="chem-overview-placeholder" class="l3-content-section"><p class="p-8 text-center text-gray-600">Detailed content for Chemicals coming soon. ONE offers safe, compliant, and specialized logistics for a wide range of chemical products, adhering to stringent safety standards.</p></div></div></div>
+        <div id="cms-l3-electronics" class="cms-page industry-detail-page"><div class="content-section"><div class="cms-hero" style="background-image: url('https://placehold.co/1200x400/333333/FFFFFF?text=Electronics+Logistics');"><h1>Electronics & White Goods Logistics</h1></div><button class="btn-secondary my-4" onclick="navigateToL2()">Back to Industry Focus Areas</button><div class="l3-sticky-subnav"><span class="l3-subnav-item active" onclick="scrollToL3Section('elec-overview-placeholder')">Overview</span></div><div id="elec-overview-placeholder" class="l3-content-section"><p class="p-8 text-center text-gray-600">Detailed content for Electronics & White Goods coming soon. ONE ensures secure and timely transport for high-value electronics and appliances, protecting your products and supply chain.</p></div></div></div>
+        <div id="cms-l3-fmcg" class="cms-page industry-detail-page"><div class="content-section"><div class="cms-hero" style="background-image: url('https://placehold.co/1200x400/333333/FFFFFF?text=FMCG+Logistics');"><h1>Fast-Moving Consumer Goods Solutions</h1></div><button class="btn-secondary my-4" onclick="navigateToL2()">Back to Industry Focus Areas</button><div class="l3-sticky-subnav"><span class="l3-subnav-item active" onclick="scrollToL3Section('fmcg-overview-placeholder')">Overview</span></div><div id="fmcg-overview-placeholder" class="l3-content-section"><p class="p-8 text-center text-gray-600">Detailed content for FMCG coming soon. ONE provides flexible and efficient shipping for fast-moving consumer goods, helping you meet market demands swiftly.</p></div></div></div>
+        <div id="cms-l3-industrial" class="cms-page industry-detail-page"><div class="content-section"><div class="cms-hero" style="background-image: url('https://placehold.co/1200x400/333333/FFFFFF?text=Industrial+Logistics');"><h1>Industrial & Machinery Transport</h1></div><button class="btn-secondary my-4" onclick="navigateToL2()">Back to Industry Focus Areas</button><div class="l3-sticky-subnav"><span class="l3-subnav-item active" onclick="scrollToL3Section('ind-overview-placeholder')">Overview</span></div><div id="ind-overview-placeholder" class="l3-content-section"><p class="p-8 text-center text-gray-600">Detailed content for Industrial & Machinery coming soon. ONE offers specialized logistics for heavy, oversized, and project cargo related to industrial equipment and machinery.</p></div></div></div>
+        <div id="cms-l3-perishables" class="cms-page industry-detail-page"><div class="content-section"><div class="cms-hero" style="background-image: url('https://placehold.co/1200x400/333333/FFFFFF?text=Perishables+Logistics');"><h1>Preserving Quality in Perishables</h1></div><button class="btn-secondary my-4" onclick="navigateToL2()">Back to Industry Focus Areas</button><div class="l3-sticky-subnav"><span class="l3-subnav-item active" onclick="scrollToL3Section('peri-overview-placeholder')">Overview</span></div><div id="peri-overview-placeholder" class="l3-content-section"><p class="p-8 text-center text-gray-600">Detailed content for Perishables coming soon. ONE provides advanced reefer technology and expert handling for your temperature-sensitive cargo, ensuring freshness.</p></div></div></div>
+        <div id="cms-l3-pharma" class="cms-page industry-detail-page"><div class="content-section"><div class="cms-hero" style="background-image: url('https://placehold.co/1200x400/333333/FFFFFF?text=Pharma+Logistics');"><h1>Pharma & Healthcare Logistics</h1></div><button class="btn-secondary my-4" onclick="navigateToL2()">Back to Industry Focus Areas</button><div class="l3-sticky-subnav"><span class="l3-subnav-item active" onclick="scrollToL3Section('pharma-overview-placeholder')">Overview</span></div><div id="pharma-overview-placeholder" class="l3-content-section"><p class="p-8 text-center text-gray-600">Detailed content for Pharma & Healthcare coming soon. ONE offers temperature-controlled, compliant, and secure logistics solutions for sensitive pharmaceutical products.</p></div></div></div>
+        <div id="cms-l3-retail" class="cms-page industry-detail-page"><div class="content-section"><div class="cms-hero" style="background-image: url('https://placehold.co/1200x400/333333/FFFFFF?text=Retail+Logistics');"><h1>Responsive Retail Logistics</h1></div><button class="btn-secondary my-4" onclick="navigateToL2()">Back to Industry Focus Areas</button><div class="l3-sticky-subnav"><span class="l3-subnav-item active" onclick="scrollToL3Section('retail-overview-placeholder')">Overview</span></div><div id="retail-overview-placeholder" class="l3-content-section"><p class="p-8 text-center text-gray-600">Detailed content for Retail coming soon. ONE delivers agile and efficient shipping solutions to meet the fast-paced and seasonal demands of the retail sector.</p></div></div></div>
+
+    </div>
+
+    <script>
+        // Tab navigation
+        function openTab(evt, tabName) {
+            var i, tabcontent, tabbuttons;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tabbuttons = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].className = tabbuttons[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+
+            if (tabName === 'sample-pages') {
+                showCmsPage('cms-l1');
+                 // Reset L3 sticky nav active states if any L3 page was previously active
+                document.querySelectorAll('.l3-subnav-item.active').forEach(item => item.classList.remove('active'));
+                const activeL3Page = document.querySelector('.cms-page.industry-detail-page.active');
+                if (activeL3Page) {
+                    const firstSubNavItem = activeL3Page.querySelector('.l3-subnav-item');
+                    if (firstSubNavItem) firstSubNavItem.classList.add('active');
+                }
+            }
+        }
+
+        function showCmsPage(pageId) {
+            const pages = document.querySelectorAll('.cms-page');
+            pages.forEach(page => page.classList.remove('active'));
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+        }
+
+        function navigateToL1() {
+            showCmsPage('cms-l1');
+             // Ensure the Industry Solutions mega menu is collapsed when navigating back to L1
+            const industryMenu = document.getElementById('industrySolutionsMenu');
+            const industryList = industryMenu.nextElementSibling;
+            industryMenu.classList.remove('expanded');
+            industryList.style.maxHeight = null;
+        }
+
+        function navigateToL2() {
+            showCmsPage('cms-l2');
+        }
+
+        function navigateToL3(industry) {
+            const targetL3PageId = 'cms-l3-' + industry;
+            showCmsPage(targetL3PageId);
+            
+            const l3Page = document.getElementById(targetL3PageId);
+            if (l3Page) {
+                const subNavItems = l3Page.querySelectorAll('.l3-subnav-item');
+                subNavItems.forEach(item => item.classList.remove('active')); 
+                const firstSubNavItem = l3Page.querySelector('.l3-subnav-item');
+                if (firstSubNavItem) {
+                    firstSubNavItem.classList.add('active');
+                    // Attempt to get the section ID for scrolling.
+                    // The placeholder L3 pages have a generic ID, so this might not always find a specific section.
+                    const sectionIdAttr = firstSubNavItem.getAttribute('onclick');
+                    if (sectionIdAttr) {
+                        const firstSectionIdMatch = sectionIdAttr.match(/'([^']+)'/);
+                        if (firstSectionIdMatch && firstSectionIdMatch[1]) {
+                            const firstSectionId = firstSectionIdMatch[1];
+                            const firstSection = document.getElementById(firstSectionId);
+                            if (firstSection) {
+                                l3Page.closest('.tab-content').scrollTop = 0; 
+                                setTimeout(() => { 
+                                   firstSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }, 100);
+                            }
+                        }
+                    } else { // Fallback for placeholders if no specific section ID
+                         l3Page.closest('.tab-content').scrollTop = 0; 
+                    }
+                }
+            }
+        }
+        
+        function scrollToL3Section(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                const parentPage = section.closest('.industry-detail-page');
+                const subNavItems = parentPage.querySelectorAll('.l3-subnav-item');
+                subNavItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('onclick').includes(sectionId)) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+        }
+
+        function toggleIndustryMenu(element) {
+            element.classList.toggle('expanded');
+            const industryList = element.nextElementSibling;
+            if (industryList.style.maxHeight) {
+                industryList.style.maxHeight = null;
+            } else {
+                industryList.style.maxHeight = industryList.scrollHeight + "px";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const initialActiveTabButton = document.querySelector('.tab-button.active');
+            if (initialActiveTabButton && initialActiveTabButton.getAttribute('onclick').includes('sample-pages')) {
+                showCmsPage('cms-l1');
+            }
+        });
+    </script>
+
+</body>
+</html>
